@@ -128,9 +128,3 @@ $vmConfig = $vmConfig | Add-AzureRmVMDataDisk -DiskSizeInGB 64 -CreateOption Emp
 New-AzureRmVM -ResourceGroupName $rgName -Location $location -VM $vmConfig
 $vm = Get-AzureRmVM -ResourceGroupName $rgName -Name $VMName
 Write-Output "Created Virtual Machine: $($vm.Id)"
-
-# Delete Key Vault
-Remove-AzureRmKeyVault -VaultName $keyVault.VaultName -ResourceGroupName $rgName -Confirm:$false
-
-# Delete Image
-Remove-AzureRmImage -ImageName $imageName -ResourceGroupName $rgName -Confirm:$false

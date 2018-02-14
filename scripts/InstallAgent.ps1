@@ -17,6 +17,7 @@ $nic = Get-AzureRmNetworkInterface -ResourceGroupName $rgName | Where-Object { $
 $publicIpId = $nic.IpConfigurations.PublicIpAddress.Id
 $publicIp = Get-AzureRmPublicIpAddress -ResourceGroupName $rgName | Where-Object { $_.Id -eq $publicIpId }
 $vmAddress = $publicIp.IpAddress
+Write-Output "Connecting to VM $($publicIp.IpAddress)"
 
 $sessionOption = New-PSSessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck
 $session = New-PSSession -ComputerName $vmAddress -UseSSL -Credential $cred -SessionOption $sessionOption
@@ -31,12 +32,45 @@ Invoke-Command -Session $session -ArgumentList $remoteArgs -ScriptBlock {
         [string] $AgentPool
     )
 
+    function GetRandomPassword {
+        $sourceChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*(){}[],.'
+        $max = $sourceChars.Length
+        $result = ''
+        for ($i = 0; $i -lt 20; $i += 1) {
+            $index = Get-Random -Minimum 0 -Maximum $max
+            $c = $sourceChars[$index]
+            $result += $c
+        }
+
+        return $result
+    }
+
     # Create and format partition G:
     $disk = Get-Disk | Where-Object { $_.PartitionStyle -eq 'RAW' }
-    $disk = Initialize-Disk -InputObject $disk -PartitionStyle GPT
+    Initialize-Disk -InputObject $disk -PartitionStyle GPT
     $partition = New-Partition -InputObject $disk -UseMaximumSize -DriveLetter 'G'
     Format-Volume -Partition $partition -FileSystem NTFS -NewFileSystemLabel 'BUILD' -Confirm:$true
     Write-Output 'Formatted volume G:'
+
+    # Create user svcBuild
+    $serviceUserName = 'svcBuild'
+    $servicePassword = GetRandomPassword
+    $serviceSecurePassword = ConvertTo-SecureString $servicePassword -AsPlainText -Force
+    $args = @{
+        Name = $serviceUserName
+        Password = $serviceSecurePassword
+        FullName = 'BuildService'
+        AccountNeverExpires = $true
+        PasswordNeverExpires = $true
+    }
+    $serviceUser = New-LocalUser @args
+    $administratorsGroup = Get-LocalGroup -Name 'Administrators'
+    Add-LocalGroupMember -Group $administratorsGroup -Member $serviceUser
+    Write-Output 'Created user svcBuild'
+
+    # Disable installer user, that installed Visual Studio 2017
+    Disable-LocalUser -Name 'installer'
+    Write-Host 'Disabled user installer'
 
     Set-Location 'G:\'
 
@@ -51,7 +85,8 @@ Invoke-Command -Session $session -ArgumentList $remoteArgs -ScriptBlock {
     Set-Location $buildFolder.FullName
     Write-Output 'Extracted vsts-agent.zip'
 
-    & .\config.cmd --unattended  --url "https://$VSTSAccount.visualstudio.com" --auth pat --token "$PAT" --pool "$AgentPool" --agent "$VMName" --runAsService
+    $serviceUserQualifiedName = "$VMName\$serviceUserName"
+    & .\config.cmd --unattended  --url "https://$VSTSAccount.visualstudio.com" --auth pat --token "$PAT" --pool "$AgentPool" --agent "$VMName" --runAsService --windowsLogonAccount "$serviceUserQualifiedName" --windowsLogonPassword "$servicePassword"
     Write-Output 'VSTS Build Agent configured.'
 }
 

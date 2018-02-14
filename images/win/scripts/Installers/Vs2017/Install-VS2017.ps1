@@ -111,22 +111,8 @@ The following workloads including required and recommended components are instal
 
 * Universal Windows Platform development
 * .NET desktop development
-* Desktop development with C++
 * ASP.NET and web development
-* Azure development
-* Node.js development
-* Data storage and processing
-* Data science and analytical applications *
-* Game development with Unity *
-* Linux development with C++ *
-* Game development with C++ *
-* Mobile development with C++ *
-* Office/SharePoint development
 * Mobile development with .NET
-* .NET Core cross-platform development
-* Visual Studio extension development *
-* Python development *
-* Mobile development with JavaScript *
 
 In addition the following optional components are installed:
 
@@ -138,5 +124,12 @@ Add-SoftwareDetailsToMarkdown -SoftwareName $SoftwareName -DescriptionMarkdown $
 Add-ContentToMarkdown -Content $($WorkLoads.Split('--') | % { if( ($_.Split(" "))[0] -like "add") { "* " +($_.Split(" "))[1] }  } )
 
 
+
+# Setup Android SDK path for Xamarin
+$androidSdkRegistryPath = 'HKLM:\SOFTWARE\WOW6432Node\Android SDK Tools'
+if (!(Test-Path $androidSdkRegistryPath)) {
+    New-Item -Path $androidSdkRegistryPath -ItemType Directory
+    New-ItemProperty -Path $androidSdkRegistryPath -Name 'Path' -Value 'C:\Program Files (x86)\Android\android-sdk' -PropertyType String
+}
 
 exit $exitCode

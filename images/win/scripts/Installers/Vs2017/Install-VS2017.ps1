@@ -97,4 +97,11 @@ Write-Host "Visual Studio version" $catalog.info.id "installed"
 $newContent = '{"Extensions":[{"Key":"1e906ff5-9da8-4091-a299-5c253c55fdc9","Value":{"ShouldAutoUpdate":false}},{"Key":"Microsoft.VisualStudio.Web.AzureFunctions","Value":{"ShouldAutoUpdate":false}}],"ShouldAutoUpdate":false,"ShouldCheckForUpdates":false}'
 Set-Content -Path "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\Extensions\MachineState.json" -Value $newContent
 
+# Setup Android SDK path for Xamarin
+$androidSdkRegistryPath = 'HKLM:\SOFTWARE\WOW6432Node\Android SDK Tools'
+if (!(Test-Path $androidSdkRegistryPath)) {
+    New-Item -Path $androidSdkRegistryPath -ItemType Directory
+    New-ItemProperty -Path $androidSdkRegistryPath -Name 'Path' -Value 'C:\Program Files (x86)\Android\android-sdk' -PropertyType String
+}
+
 exit $exitCode

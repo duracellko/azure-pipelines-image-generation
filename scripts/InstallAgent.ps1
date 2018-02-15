@@ -33,7 +33,7 @@ Invoke-Command -Session $session -ArgumentList $remoteArgs -ScriptBlock {
     )
 
     function GetRandomPassword {
-        $sourceChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*(){}[],.'
+        $sourceChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$^&(){}[],.'
         $max = $sourceChars.Length
         $result = ''
         for ($i = 0; $i -lt 20; $i += 1) {
@@ -86,7 +86,7 @@ Invoke-Command -Session $session -ArgumentList $remoteArgs -ScriptBlock {
     Write-Output 'Extracted vsts-agent.zip'
 
     $serviceUserQualifiedName = "$VMName\$serviceUserName"
-    & .\config.cmd --unattended  --url "https://$VSTSAccount.visualstudio.com" --auth pat --token "$PAT" --pool "$AgentPool" --agent "$VMName" --runAsService --windowsLogonAccount "$serviceUserQualifiedName" --windowsLogonPassword "$servicePassword"
+    & .\config.cmd --unattended  --url "`"https://$VSTSAccount.visualstudio.com`"" --auth pat --token "`"$PAT`"" --pool "`"$AgentPool`"" --agent "`"$VMNam`"e" --runAsService --windowsLogonAccount "`"$serviceUserQualifiedName`"" --windowsLogonPassword "`"$servicePassword`""
     Write-Output 'VSTS Build Agent configured.'
 }
 

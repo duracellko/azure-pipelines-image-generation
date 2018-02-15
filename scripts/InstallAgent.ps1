@@ -86,7 +86,7 @@ Invoke-Command -Session $session -ArgumentList $remoteArgs -ScriptBlock {
     Write-Output 'Extracted vsts-agent.zip'
 
     $serviceUserQualifiedName = "$VMName\$serviceUserName"
-    & .\config.cmd --unattended  --url "`"https://$VSTSAccount.visualstudio.com`"" --auth pat --token "`"$PAT`"" --pool "`"$AgentPool`"" --agent "`"$VMNam`"e" --runAsService --windowsLogonAccount "`"$serviceUserQualifiedName`"" --windowsLogonPassword "`"$servicePassword`""
+    & .\config.cmd --unattended  --url "`"https://$VSTSAccount.visualstudio.com`"" --auth pat --token "`"$PAT`"" --pool "`"$AgentPool`"" --agent "`"$VMName`"" --runAsService --windowsLogonAccount "`"$serviceUserQualifiedName`"" --windowsLogonPassword "`"$servicePassword`""
     Write-Output 'VSTS Build Agent configured.'
 }
 

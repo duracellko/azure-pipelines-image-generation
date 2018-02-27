@@ -20,15 +20,15 @@ _Environment:_
 ## Docker images
 
 The following container images have been cached:
-* microsoft/aspnetcore-build:(sha256:8a4a6f76af05e0c518f5d9500334d2c543376813249e940b71ddaa67476874db)
 * microsoft/aspnet:(sha256:e4dcdc3c543f0b6a481aabd8ddba0d86472a0c965ea9c13b271d319c676f9d3b)
 * microsoft/dotnet-framework:(sha256:88e174003cb579e506d6d5db9d7e8ceaf5d04de95fe9b8a9bbf5f803fa315f0d)
+* microsoft/aspnetcore-build:(sha256:fd99aee5d864907cbad1343cc462920adf5202484ca2a79bcce85f885364945f)
 * microsoft/windowsservercore:(sha256:554b69722f31381f10a2f3ddd81e4cb50beba7af8561e9014a9e431a52c8f825)
 * microsoft/nanoserver:(sha256:8033bb347108ce994ff56ecc2aa731ef76eb371afdfbf059a69dc50a2f69a437)
 
 ## Visual Studio 2017 Enterprise
 
-_Version:_ VisualStudio/15.6.0+27428.1<br/>
+_Version:_ VisualStudio/15.5.7+27130.2036<br/>
 _Location:_ C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise
 
 The following workloads including required and recommended components are installed with Visual Studio 2017:
@@ -107,7 +107,7 @@ In addition the following optional components are installed:
 
 ## SQL Server Data Tools for VS 2017
 
-_Version:_ 15.1.61801.210<br/>
+_Version:_ 15.1.61710.120<br/>
 
 The following components are installed:
 
@@ -260,7 +260,7 @@ _Location:_ C:\Modules\azurerm_5.1.1\AzureRM\5.1.1\AzureRM.psd1
 
 ## Azure CLI
 
-_Version:_ 2.0.28<br/>
+_Version:_ 2.0.27<br/>
 _Environment:_
 * PATH: contains location of az.cmd
 
@@ -277,84 +277,18 @@ _Environment:_
 * PATH: contains location of git-lfs.exe
 * GIT_LFS_PATH: location of git-lfs.exe
 
-## Go (x64)
+## Go
 
-#### 1.9.4
-
+_Version:_ 1.9.3<br/>
 _Environment:_
-* GOROOT_1_9_X64: root directory of the Go 1.9.4 installation
-
-#### 1.10
-
-_Environment:_
-* PATH: contains the location of go.exe version 1.10
-* GOROOT: root directory of the Go 1.10 installation
-* GOROOT_1_10_X64: root directory of the Go 1.10 installation
-
-## Ruby (x64)
-
-#### 2.3.3
-
-_Environment:_
-* RUBYOPT: -Eutf-8
-* RUBY_2_3_X64: root directory of the Ruby 2.3.3 installation
-
-#### 2.4.3-1
-
-_Environment:_
-* RUBYOPT: -Eutf-8
-* PATH: contains the location of ruby.exe version 2.4.3-1
-* RUBY_2_4_X64: root directory of the Ruby 2.4.3-1 installation
-
-#### 2.5.0-1
-
-_Environment:_
-* RUBYOPT: -Eutf-8
-* RUBY_2_5_X64: root directory of the Ruby 2.5.0-1 installation
+* PATH: contains location of go.exe
+* GOROOT: root directory of the Go installation
 
 ## Subversion
 
 _Version:_ 1.8.15<br/>
 _Environment:_
 * PATH: contains location of svn.exe
-
-## Google Chrome
-
-_version:_
-64.0.3282.186
-
-## Mozilla Firefox
-
-_version:_
-58.0.2
-
-## Selenium Web Drivers
-
-
-#### Chrome Driver
-
-_version:_
-2.35
-
-_Environment:_
-* ChromeWebDriver: location of chromedriver.exe
-
-#### Gecko Driver
-
-_version:_
-0.19.1
-
-_Environment:_
-* GeckoWebDriver: location of geckodriver.exe
-
-#### IE Driver
-
-_version:_
-3.8.0.0
-
-_Environment:_
-* IEWebDriver: location of IEDriverServer.exe
-
 
 ## Node.js
 
@@ -399,7 +333,7 @@ _Environment:_
 
 ## Gradle
 
-_Version:_ 4.6<br/>
+_Version:_ 4.5.1<br/>
 _Environment:_
 * PATH: contains location of gradle
 
@@ -423,7 +357,6 @@ _Environment:_
 _SDK:_
 * 2.1.4 C:\Program Files\dotnet\sdk\2.1.4
 * 2.1.2 C:\Program Files\dotnet\sdk\2.1.2
-* 2.1.100 C:\Program Files\dotnet\sdk\2.1.100
 * 2.0.3 C:\Program Files\dotnet\sdk\2.0.3
 * 2.0.0 C:\Program Files\dotnet\sdk\2.0.0
 * 1.1.7 C:\Program Files\dotnet\sdk\1.1.7

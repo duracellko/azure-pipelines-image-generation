@@ -19,4 +19,19 @@ Start-Sleep 40
 New-AzureRmRoleAssignment -RoleDefinitionName Contributor -ServicePrincipalName $spAppId
 $sub = Get-AzureRmSubscription -SubscriptionId $subscriptionId
 $tenantId = $sub.TenantId
-"", "Note this variable-setting script for running Packer with these Azure resources in the future:", "==============================================================================================", "`$spClientId = `"$spClientId`"", "`$spClientSecret = `"$spClientSecret`"", "`$subscriptionId = `"$subscriptionId`"", "`$tenantId = `"$tenantId`"", "`$spObjectId = `"$spObjectId`"", "`$location = `"$location`"", "`$rgName = `"$rgName`"", "`$storageAccountName = `"$storageAccountName`"", ""
+$result = @(
+    ""
+    "Note this variable-setting script for running Packer with these Azure resources in the future:"
+    "=============================================================================================="
+    "`$spClientId = `"$spClientId`""
+    "`$spClientSecret = `"$spClientSecret`""
+    "`$subscriptionId = `"$subscriptionId`""
+    "`$tenantId = `"$tenantId`""
+    "`$spObjectId = `"$spObjectId`""
+    "`$location = `"$location`""
+    "`$rgName = `"$rgName`""
+    "`$storageAccountName = `"$storageAccountName`""
+    ""
+)
+
+Write-Output $result

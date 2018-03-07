@@ -7,7 +7,7 @@ param
     [PSCredential] $cred
 )
 
-# Create private key for WinRMS
+# Create private key for WinRM
 $fullDnsName = "$VMName.$location.cloudapp.azure.com"
 $tempPath = [System.IO.Path]::GetTempPath()
 $privateKeyPath = Join-Path $tempPath "WinRM.pfx"

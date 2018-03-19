@@ -4,7 +4,8 @@ param
     [string] $location,
     [string] $vhdUri,
     [string] $VMName,
-    [PSCredential] $cred
+    [PSCredential] $cred,
+	[string] $VMSize = 'Standard_B2S'
 )
 
 # Create private key for WinRM
@@ -118,7 +119,7 @@ $image = New-AzureRmImage -ImageName $imageName -ResourceGroupName $rgName -Imag
 Write-Output "Created Image: $($image.Id)"
 
 # Create a virtual machine configuration
-$vmConfig = New-AzureRmVMConfig -VMName $VMName -VMSize 'Basic_A2'
+$vmConfig = New-AzureRmVMConfig -VMName $VMName -VMSize $VMSize
 $vmConfig = $vmConfig | Set-AzureRmVMOperatingSystem -Windows -ComputerName $VMName -Credential $cred -WinRMHttps -WinRMCertificateUrl $keyVaultWinRM.Id
 $vmConfig = $vmConfig | Set-AzureRmVMSourceImage -Id $image.Id
 $vmConfig = $vmConfig | Add-AzureRmVMSecret -SourceVaultId $keyVault.ResourceId -CertificateStore 'My' -CertificateUrl $keyVaultWinRM.Id

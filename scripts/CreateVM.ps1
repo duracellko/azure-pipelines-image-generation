@@ -113,14 +113,14 @@ Write-Output "Created Network Interface: $($nic.Id)"
 
 # Define the image created by Packer
 $imageConfig = New-AzureRmImageConfig -Location $location
-$imageConfig = Set-AzureRmImageOsDisk -Image $imageConfig -OsType Windows -OsState Generalized -BlobUri $vhdUri -StorageAccountType PremiumLRS
+$imageConfig = Set-AzureRmImageOsDisk -Image $imageConfig -OsType Windows -OsState Generalized -BlobUri $vhdUri -StorageAccountType Premium_LRS
 $imageName = $VMName + 'Image'
 $image = New-AzureRmImage -ImageName $imageName -ResourceGroupName $rgName -Image $imageConfig
 Write-Output "Created Image: $($image.Id)"
 
 # Create a virtual machine configuration
 $vmConfig = New-AzureRmVMConfig -VMName $VMName -VMSize $VMSize
-$vmConfig = $vmConfig | Set-AzureRmVMOperatingSystem -Windows -ComputerName $VMName -Credential $cred -WinRMHttps -WinRMCertificateUrl $keyVaultWinRM.Id
+$vmConfig = $vmConfig | Set-AzureRmVMOperatingSystem -Windows -ComputerName $VMName -Credential $cred -ProvisionVMAgent -WinRMHttps -WinRMCertificateUrl $keyVaultWinRM.Id
 $vmConfig = $vmConfig | Set-AzureRmVMSourceImage -Id $image.Id
 $vmConfig = $vmConfig | Add-AzureRmVMSecret -SourceVaultId $keyVault.ResourceId -CertificateStore 'My' -CertificateUrl $keyVaultWinRM.Id
 $vmConfig = $vmConfig | Add-AzureRmVMNetworkInterface -Id $nic.Id

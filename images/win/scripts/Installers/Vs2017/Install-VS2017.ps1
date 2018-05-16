@@ -64,6 +64,7 @@ $WorkLoads = '--add Microsoft.VisualStudio.Workload.CoreEditor ' + `
                 '--add Microsoft.VisualStudio.Component.Web ' + `
                 '--add Microsoft.VisualStudio.Workload.Universal ' + `
                 '--add Microsoft.VisualStudio.Component.Windows10SDK.15063.UWP ' + `
+                '--add Microsoft.VisualStudio.Component.Windows10SDK.16299.UWP ' + `
                 '--add Microsoft.VisualStudio.Workload.NetCrossPlat ' + `
                 '--add Microsoft.VisualStudio.Component.Azure.Storage.AzCopy ' + `
                 '--add Component.Android.SDK25 ' + `

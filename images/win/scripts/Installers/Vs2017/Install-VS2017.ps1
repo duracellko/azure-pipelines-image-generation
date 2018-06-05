@@ -50,57 +50,27 @@ Function InstallVS
   }
 }
 
-$WorkLoads = '--allWorkloads --includeRecommended ' + `
-                '--add Microsoft.Net.Component.4.6.2.SDK ' + `
-                '--add Microsoft.Net.Component.4.6.2.TargetingPack ' + `
-                '--add Microsoft.Net.ComponentGroup.4.6.2.DeveloperTools ' + `
+$WorkLoads = '--add Microsoft.VisualStudio.Workload.CoreEditor ' + `
+                '--add Microsoft.VisualStudio.Workload.ManagedDesktop ' + `
+                '--add Microsoft.Net.ComponentGroup.TargetingPacks.Common ' + `
+                '--add Microsoft.VisualStudio.Component.Debugger.JustInTime ' + `
                 '--add Microsoft.Net.Component.4.7.SDK ' + `
                 '--add Microsoft.Net.Component.4.7.TargetingPack ' + `
                 '--add Microsoft.Net.ComponentGroup.4.7.DeveloperTools ' + `
                 '--add Microsoft.Net.Component.4.7.1.SDK ' + `
                 '--add Microsoft.Net.Component.4.7.1.TargetingPack ' + `
                 '--add Microsoft.Net.ComponentGroup.4.7.1.DeveloperTools ' + `
-                '--add Microsoft.Net.Core.Component.SDK.1x ' + `
-                '--add Microsoft.NetCore.1x.ComponentGroup.Web ' + `
+                '--add Microsoft.VisualStudio.Workload.NetWeb ' + `
+                '--add Microsoft.VisualStudio.Component.Web ' + `
+                '--add Microsoft.VisualStudio.Workload.Universal ' + `
+                '--add Microsoft.VisualStudio.Component.Windows10SDK.15063.UWP ' + `
+                '--add Microsoft.VisualStudio.Component.Windows10SDK.16299.UWP ' + `
+                '--add Microsoft.VisualStudio.Workload.NetCrossPlat ' + `
                 '--add Microsoft.VisualStudio.Component.Azure.Storage.AzCopy ' + `
-                '--add Microsoft.VisualStudio.Component.PowerShell.Tools ' + `
-                '--add Microsoft.VisualStudio.Component.VC.140 ' + `
-                '--add Component.Dotfuscator ' + `
-                '--add Microsoft.VisualStudio.Component.VC.ATL ' + `
-                '--add Microsoft.VisualStudio.Component.VC.ATLMFC ' + `
-                '--add Microsoft.VisualStudio.Component.VC.ClangC2 ' + `
-                '--add Microsoft.VisualStudio.Component.VC.CLI.Support ' + `
-                '--add Microsoft.VisualStudio.Component.VC.Modules.x86.x64 ' + `
-                '--add Microsoft.VisualStudio.Component.Windows10SDK.10240 ' + `
-                '--add Microsoft.VisualStudio.Component.Windows10SDK.10586 ' + `
-                '--add Microsoft.VisualStudio.Component.Windows10SDK.14393 ' + `
-                '--add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop ' + `
-                '--add Component.Unreal ' + `
-                '--add Component.Unreal.Android ' + `
-                '--add Component.Android.SDK23 ' + `
-                '--add Microsoft.VisualStudio.Component.TestTools.WebLoadTest ' + `
-                '--add Microsoft.VisualStudio.Web.Mvc4.ComponentGroup ' + `
-                '--add Component.CPython2.x64 ' + `
-                '--add Microsoft.Component.PythonTools.UWP ' + `
-                '--add Microsoft.Component.VC.Runtime.OSSupport ' + `
-                '--add Microsoft.VisualStudio.Component.VC.Tools.ARM ' + `
-                '--add Microsoft.VisualStudio.ComponentGroup.UWP.VC ' + `
-                '--add Microsoft.VisualStudio.Component.VSSDK ' + `
-                '--add Microsoft.VisualStudio.Component.LinqToSql ' + `
-                '--add Microsoft.VisualStudio.Component.TestTools.CodedUITest ' + `
-                '--add Microsoft.VisualStudio.Component.TestTools.Core ' + `
-                '--add Microsoft.VisualStudio.Component.TypeScript.2.0 ' + `
-                '--add Microsoft.VisualStudio.Component.TypeScript.2.1 ' + `
-                '--add Microsoft.VisualStudio.Component.TypeScript.2.2 ' + `
-                '--add Microsoft.VisualStudio.Component.VC.Tools.ARM64 ' + `
-                '--add Microsoft.VisualStudio.Component.Windows10SDK.16299.Desktop.arm ' + `
-                '--add Microsoft.VisualStudio.Component.DslTools ' + `
-                '--add Microsoft.VisualStudio.Component.Windows81SDK ' + `
-                '--add Microsoft.VisualStudio.Component.WinXP ' + `
-                '--add Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Win81 ' + `
-                '--add Microsoft.VisualStudio.ComponentGroup.NativeDesktop.WinXP ' + `
-                '--add Microsoft.VisualStudio.ComponentGroup.ArchitectureTools.Managed ' + `
-                '--add Microsoft.Component.Blend.SDK.WPF'
+                '--add Component.Android.SDK25 ' + `
+                '--add Component.JavaJDK ' + `
+                '--add Component.Xamarin ' + `
+                '--add Component.Xamarin.SdkManager '
 
 $Sku = 'Enterprise'
 $VSBootstrapperURL = 'https://aka.ms/vs/15/release/vs_enterprise.exe'
@@ -143,22 +113,8 @@ The following workloads including required and recommended components are instal
 
 * Universal Windows Platform development
 * .NET desktop development
-* Desktop development with C++
 * ASP.NET and web development
-* Azure development
-* Node.js development
-* Data storage and processing
-* Data science and analytical applications *
-* Game development with Unity *
-* Linux development with C++ *
-* Game development with C++ *
-* Mobile development with C++ *
-* Office/SharePoint development
 * Mobile development with .NET
-* .NET Core cross-platform development
-* Visual Studio extension development *
-* Python development *
-* Mobile development with JavaScript *
 
 In addition the following optional components are installed:
 

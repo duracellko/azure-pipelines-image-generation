@@ -126,5 +126,11 @@ Add-SoftwareDetailsToMarkdown -SoftwareName $SoftwareName -DescriptionMarkdown $
 Add-ContentToMarkdown -Content $($WorkLoads.Split('--') | % { if( ($_.Split(" "))[0] -like "add") { "* " +($_.Split(" "))[1] }  } )
 
 
+# Setup Android SDK path for Xamarin
+$androidSdkRegistryPath = 'HKLM:\SOFTWARE\WOW6432Node\Android SDK Tools'
+if (!(Test-Path $androidSdkRegistryPath)) {
+    New-Item -Path $androidSdkRegistryPath -ItemType Directory
+    New-ItemProperty -Path $androidSdkRegistryPath -Name 'Path' -Value 'C:\Program Files (x86)\Android\android-sdk' -PropertyType String
+}
 
 exit $exitCode

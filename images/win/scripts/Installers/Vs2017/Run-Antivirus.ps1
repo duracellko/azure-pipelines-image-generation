@@ -13,4 +13,4 @@ Pop-Location
 
 Write-Host "Set antivirus parmeters"
 Set-MpPreference -ScanAvgCPULoadFactor 5 `
-                 -ExclusionPath "D:\", "C:\"
+                 -ExclusionPath "D:\", "C:\", "G:\"

@@ -31,9 +31,9 @@ $ndk_root = "C:\Microsoft\AndroidNDK64\"
 
 if(Test-Path $ndk_root){
 
-	# Download Android NDK r17b
-	Invoke-WebRequest -UseBasicParsing -Uri "https://dl.google.com/android/repository/android-ndk-r17b-windows-x86_64.zip" -OutFile android-ndk-r17b-windows-x86_64.zip
-	Expand-Archive -Path android-ndk-r17b-windows-x86_64.zip -DestinationPath $ndk_root
+	# Download Android NDK r18
+	Invoke-WebRequest -UseBasicParsing -Uri "https://dl.google.com/android/repository/android-ndk-r18-windows-x86_64.zip" -OutFile android-ndk-r18-windows-x86_64.zip
+	Expand-Archive -Path android-ndk-r18-windows-x86_64.zip -DestinationPath $ndk_root
 
     $androidNDKs = Get-ChildItem -Path $ndk_root | Sort-Object -Property Name -Descending | Select-Object -First 1
     $latestAndroidNDK = $androidNDKs.FullName;

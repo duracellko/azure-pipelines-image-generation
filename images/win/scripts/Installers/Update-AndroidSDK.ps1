@@ -31,12 +31,24 @@ $ndk_root = "C:\Microsoft\AndroidNDK64\"
 
 if(Test-Path $ndk_root){
 
+	# Download Android NDK r18b
+	Invoke-WebRequest -UseBasicParsing -Uri "https://dl.google.com/android/repository/android-ndk-r18b-windows-x86_64.zip" -OutFile android-ndk-r18b-windows-x86_64.zip
+	Expand-Archive -Path android-ndk-r18b-windows-x86_64.zip -DestinationPath $ndk_root
+
     $androidNDKs = Get-ChildItem -Path $ndk_root | Sort-Object -Property Name -Descending | Select-Object -First 1
     $latestAndroidNDK = $androidNDKs.FullName;
 
     setx ANDROID_HOME $sdk_root /M
     setx ANDROID_NDK_HOME $latestAndroidNDK /M
     setx ANDROID_NDK_PATH $latestAndroidNDK /M
+
+	# Setup Android NDK path for Xamarin
+	$androidNdkRegistryPath = 'HKLM:\SOFTWARE\WOW6432Node\Novell\Mono for Android'
+	if (!(Test-Path $androidNdkRegistryPath)) {
+		New-Item -Path $androidNdkRegistryPath -ItemType Directory
+		New-ItemProperty -Path $androidNdkRegistryPath -Name 'AndroidNdkDirectory' -Value $latestAndroidNDK -PropertyType String
+	}
+
 }
 else {
     Write-Host "NDK is not installed at path $ndk_root"
@@ -131,3 +143,21 @@ _Location:_ $sdk
 "@
     Add-ContentToMarkdown -Content $content
 }
+
+
+# Adding description of the software to Markdown
+$Header = @"
+
+## Android NDK
+
+"@
+
+Add-ContentToMarkdown -Content $Header
+
+$AndroidNdkList =(Get-ChildItem $ndk_root) `
+           | Where { $_.Name -match "android-ndk.*" } `
+           | Sort-Object -Descending `
+           | % { "#### $($_.Name)`n`n_Location:_ $($_.FullName)`n" }
+
+Add-ContentToMarkdown -Content $AndroidNdkList
+

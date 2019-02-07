@@ -114,6 +114,13 @@ Write-Host "Disk sizes after expansion"
 wmic logicaldisk get size,freespace,caption
 
 
+# Enable 8.3 name creation on drive C:
+# This setting is required by Xamarin Android AOT before installation of Visual Studio
+
+fsutil 8dot3name set C: 0
+fsutil 8dot3name query C:
+
+
 # Adding description of the software to Markdown
 
 $Content = @"
